@@ -6,14 +6,14 @@ provider "aws" {
 
 
 # store the terraform state file in s3
-terraform {
-  backend "s3" {
-    bucket  = "aosnote-terraform-state-bucket"
-    key     = "build/terraform.tfstate"
-    region  = "us-east-1"
-    profile = "terraform-user"
-  }
-}
+# terraform {
+#   backend "s3" {
+#     bucket  = "codepipeline-us-east-1-124995679952"
+#     key     = "build/terraform.tfstate"
+#     region  = "us-east-1"
+#     profile = "terraform-user"
+#   }
+# }
 
 
 # create default vpc if one does not exit
@@ -97,7 +97,7 @@ resource "aws_instance" "ec2_instance" {
   instance_type          = "t2.micro"
   subnet_id              = aws_default_subnet.default_az1.id
   vpc_security_group_ids = [aws_security_group.ec2_security_group.id]
-  key_name               = "myec2key"
+  key_name               = "first-key-pair"
   user_data              = file("install_techmax.sh")
 
   tags = {
